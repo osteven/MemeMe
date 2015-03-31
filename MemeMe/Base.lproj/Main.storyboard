@@ -152,7 +152,7 @@
         <!--Meme Tabs-->
         <scene sceneID="YbO-1I-Z3K">
             <objects>
-                <tabBarController title="Meme Tabs" id="cVp-fN-Vad" sceneMemberID="viewController">
+                <tabBarController title="Meme Tabs" id="cVp-fN-Vad" customClass="MemeTabViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="9kv-gI-2JL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>

@@ -16,6 +16,7 @@
 		B0BF819A1ACB529400080758 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF81981ACB529400080758 /* Meme.swift */; };
 		B0BF819B1ACB529400080758 /* MemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF81991ACB529400080758 /* MemeManager.swift */; };
 		B0BF819D1ACB534000080758 /* EditMemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF819C1ACB534000080758 /* EditMemeViewController.swift */; };
+		B0BF819F1ACB65BB00080758 /* MemeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BF819E1ACB65BB00080758 /* MemeTabViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		B0BF81981ACB529400080758 /* Meme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 		B0BF81991ACB529400080758 /* MemeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeManager.swift; sourceTree = "<group>"; };
 		B0BF819C1ACB534000080758 /* EditMemeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMemeViewController.swift; sourceTree = "<group>"; };
+		B0BF819E1ACB65BB00080758 /* MemeTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeTabViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				B0BF81761ACB45AB00080758 /* Supporting Files */,
 				B0BF81981ACB529400080758 /* Meme.swift */,
 				B0BF819C1ACB534000080758 /* EditMemeViewController.swift */,
+				B0BF819E1ACB65BB00080758 /* MemeTabViewController.swift */,
 				B0BF81991ACB529400080758 /* MemeManager.swift */,
 			);
 			path = MemeMe;
@@ -223,6 +226,7 @@
 			files = (
 				B0BF819A1ACB529400080758 /* Meme.swift in Sources */,
 				B0BF819D1ACB534000080758 /* EditMemeViewController.swift in Sources */,
+				B0BF819F1ACB65BB00080758 /* MemeTabViewController.swift in Sources */,
 				B0BF817B1ACB45AB00080758 /* ViewController.swift in Sources */,
 				B0BF81791ACB45AB00080758 /* AppDelegate.swift in Sources */,
 				B0BF819B1ACB529400080758 /* MemeManager.swift in Sources */,
