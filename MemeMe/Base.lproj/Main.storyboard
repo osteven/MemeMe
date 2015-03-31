@@ -54,7 +54,7 @@
         <!--Edit Meme-->
         <scene sceneID="jQc-J1-1qm">
             <objects>
-                <viewController storyboardIdentifier="MemeEditViewController" title="Edit Meme" id="Y7d-Vy-niU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditViewController" title="Edit Meme" id="Y7d-Vy-niU" customClass="EditMemeViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ita-kF-VJR"/>
                         <viewControllerLayoutGuide type="bottom" id="8zZ-zf-aoL"/>
