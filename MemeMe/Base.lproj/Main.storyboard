@@ -51,10 +51,10 @@
             </objects>
             <point key="canvasLocation" x="1066" y="392"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit Meme-->
         <scene sceneID="jQc-J1-1qm">
             <objects>
-                <viewController storyboardIdentifier="MemeEditViewController" id="Y7d-Vy-niU" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeEditViewController" title="Edit Meme" id="Y7d-Vy-niU" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ita-kF-VJR"/>
                         <viewControllerLayoutGuide type="bottom" id="8zZ-zf-aoL"/>
@@ -62,17 +62,55 @@
                     <view key="view" contentMode="scaleToFill" id="2fe-Tj-OWE">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QeF-Pc-yAu" userLabel="Image and Labels">
+                                <rect key="frame" x="24" y="28" width="400" height="400"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x3h-7p-jNc">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="179" y="70" width="42" height="21"/>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOTTOM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiY-Sb-kVw">
+                                        <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="widthClass=compact" fixedFrame="YES">
+                                            <rect key="frame" x="179" y="328" width="123" height="21"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="x3h-7p-jNc"/>
+                                        <exclude reference="MiY-Sb-kVw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="x3h-7p-jNc"/>
+                                        <include reference="MiY-Sb-kVw"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cec-m8-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1919" y="44"/>
+            <point key="canvasLocation" x="1918.5" y="44"/>
         </scene>
-        <!--View Controller-->
+        <!--Show Sent Meme-->
         <scene sceneID="NdC-XN-qr3">
             <objects>
-                <viewController storyboardIdentifier="MemeDetailViewController" id="yIJ-6j-yIY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MemeDetailViewController" title="Show Sent Meme" id="yIJ-6j-yIY" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p3j-Df-clN"/>
                         <viewControllerLayoutGuide type="bottom" id="L8Q-b1-WYp"/>
