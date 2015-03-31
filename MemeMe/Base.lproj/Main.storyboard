@@ -99,8 +99,31 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4M6-Ys-8xE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Pick Image" id="9yW-Ox-fco"/>
+                                    <barButtonItem title="Camera" id="gW2-vm-1vc"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="O0h-qc-CI0"/>
+                                    <barButtonItem title="Cancel" id="tP0-vv-xtj"/>
+                                    <barButtonItem title="Save" id="kyv-uc-I1o"/>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="556" width="400" height="44"/>
+                                </variation>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="4M6-Ys-8xE"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="4M6-Ys-8xE"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cec-m8-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
