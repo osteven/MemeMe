@@ -7,7 +7,7 @@
         <!--Sent Memes List-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController title="Sent Memes List" id="vXZ-lx-hvc" customClass="ViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Sent Memes List" id="vXZ-lx-hvc" customClass="SentMemeTableViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
