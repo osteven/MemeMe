@@ -51,6 +51,42 @@
             </objects>
             <point key="canvasLocation" x="1066" y="392"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="jQc-J1-1qm">
+            <objects>
+                <viewController storyboardIdentifier="MemeEditViewController" id="Y7d-Vy-niU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ita-kF-VJR"/>
+                        <viewControllerLayoutGuide type="bottom" id="8zZ-zf-aoL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2fe-Tj-OWE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cec-m8-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1919" y="44"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="NdC-XN-qr3">
+            <objects>
+                <viewController storyboardIdentifier="MemeDetailViewController" id="yIJ-6j-yIY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p3j-Df-clN"/>
+                        <viewControllerLayoutGuide type="bottom" id="L8Q-b1-WYp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K0m-nG-1Qw">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SKu-QM-0It" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1748" y="936"/>
+        </scene>
         <!--Meme Tabs-->
         <scene sceneID="YbO-1I-Z3K">
             <objects>
