@@ -17,6 +17,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Properties
     var currentMeme: Meme? = nil
     var memeManager: MemeManager? = nil
+    let VERTICAL_MARGIN: CGFloat = 24.0
 
 
     // MARK: -
@@ -65,7 +66,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             bottomMemeText.text = "BOTTOM"
         }
         // resize the image view so the top and bottom text fields are positioned nicely
-        let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - 44
+        let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
     }
 
@@ -199,7 +200,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
     */
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        let availableHeight = size.height - self.toolBar.frame.height - 20
+        let menuHeight = size.height > size.width ? VERTICAL_MARGIN : 4
+        let availableHeight = size.height - (2 * self.toolBar.bounds.size.height) - menuHeight
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
     }
 
@@ -220,8 +222,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             var newheight = ratio * image.size.height
 
             // don't let the new height get too big or the bottom text falls below the toolbar
-//let availableHeight = self.view.frame.height - self.toolBar.frame.height - 20
-            let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - 44
+            let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
             if newheight > availableHeight { newheight = availableHeight }
 
             self.imageView.image = image
