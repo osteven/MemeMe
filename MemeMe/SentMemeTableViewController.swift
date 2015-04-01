@@ -27,7 +27,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     }
 
     func presentMemeEditorModal() {
-        let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor")! as EditMemeViewController
+        let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
         editController.memeManager = self.memeManager
         editController.currentMeme = nil
         self.presentViewController(editController, animated: true, completion: nil)
