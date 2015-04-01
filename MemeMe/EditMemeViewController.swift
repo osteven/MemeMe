@@ -81,6 +81,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         self.unsubscribeFromKeyboardNotificiations()
     }
 
+
     @IBAction func doCancel(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -191,7 +192,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(pickerController, animated: true, completion: nil)
         }
     }
-
 
     /* Resize the image view when user goes switches between portrait and landscape.  This also will
     re-position the top and bottom text fields.
