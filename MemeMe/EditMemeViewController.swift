@@ -21,14 +21,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // MARK: -
     // MARK: Outlets
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var topMemeText: UITextField!
-    @IBOutlet weak var bottomMemeText: UITextField!
-    @IBOutlet weak var cameraButton: UIBarButtonItem!
-    @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var ximageView: UIImageView!
+    @IBOutlet weak var xtopMemeText: UITextField!
+    @IBOutlet weak var xbottomMemeText: UITextField!
+    @IBOutlet weak var xcameraButton: UIBarButtonItem!
+    @IBOutlet weak var xsaveButton: UIBarButtonItem!
+    @IBOutlet weak var ximageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var xtoolBar: UIToolbar!
 
+    @IBOutlet weak var imageView: UIImageView!
 
     // MARK: -
     // MARK: Load & Dismiss Actions
