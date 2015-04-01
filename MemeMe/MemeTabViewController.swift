@@ -32,7 +32,7 @@ class MemeTabViewController: UITabBarController {
     func presentMemeEditorModal() {
 
         if let currentSelectedTabVC = self.selectedViewController {
-            let editController = currentSelectedTabVC.storyboard!.instantiateViewControllerWithIdentifier("MemeEditor")! as EditMemeViewController
+            let editController = currentSelectedTabVC.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
             editController.memeManager = self.memeManager
 //            if let tableVC = currentSelectedTabVC as? SentMemeTableViewController {
 //                editController.parentTable = tableVC.tableView
