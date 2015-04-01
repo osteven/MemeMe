@@ -89,7 +89,7 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QeF-Pc-yAu" userLabel="Image and Labels" customClass="UIImageView">
+                            <view contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QeF-Pc-yAu" userLabel="Image and Labels" customClass="UIImageView">
                                 <rect key="frame" x="24" y="28" width="400" height="400"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P9Y-RL-LAv">
@@ -132,9 +132,10 @@
                                         </variation>
                                     </textField>
                                 </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="bottom" secondItem="QeF-Pc-yAu" secondAttribute="bottomMargin" id="06w-Ou-WiS">
-                                        <variation key="widthClass=compact" constant="6"/>
+                                        <variation key="widthClass=compact" constant="-4"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="400" id="4YA-mb-78C"/>
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="trailing" secondItem="QeF-Pc-yAu" secondAttribute="trailingMargin" id="8IR-h3-srl"/>
@@ -146,7 +147,7 @@
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="width" secondItem="ylx-m4-Hfs" secondAttribute="width" id="iUC-q2-oLK"/>
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="leading" secondItem="ylx-m4-Hfs" secondAttribute="leading" id="w61-OA-OW2"/>
                                     <constraint firstItem="ylx-m4-Hfs" firstAttribute="top" secondItem="QeF-Pc-yAu" secondAttribute="topMargin" id="yeG-N2-rqE">
-                                        <variation key="widthClass=compact" constant="6"/>
+                                        <variation key="widthClass=compact" constant="4"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -196,6 +197,7 @@
                             <constraint firstItem="8zZ-zf-aoL" firstAttribute="top" secondItem="4M6-Ys-8xE" secondAttribute="bottom" id="ACe-QB-xhG"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" constant="41" id="LmC-j5-0eS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4M6-Ys-8xE" secondAttribute="trailing" constant="-16" id="i3W-x5-RTa"/>
+                            <constraint firstAttribute="centerY" secondItem="QeF-Pc-yAu" secondAttribute="centerY" id="lbK-iz-PpR"/>
                             <constraint firstItem="4M6-Ys-8xE" firstAttribute="top" secondItem="QeF-Pc-yAu" secondAttribute="bottom" constant="11" id="o18-Rn-SEc"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="leading" secondItem="2fe-Tj-OWE" secondAttribute="leadingMargin" constant="8" id="q8j-Hf-PVh"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="centerX" secondItem="4M6-Ys-8xE" secondAttribute="centerX" id="sWX-bQ-tKg"/>
@@ -210,6 +212,7 @@
                             <mask key="constraints">
                                 <exclude reference="9OR-UP-EvT"/>
                                 <exclude reference="LmC-j5-0eS"/>
+                                <exclude reference="lbK-iz-PpR"/>
                                 <exclude reference="q8j-Hf-PVh"/>
                                 <exclude reference="sWX-bQ-tKg"/>
                                 <exclude reference="uJ1-TG-T0A"/>
@@ -226,9 +229,10 @@
                             <mask key="constraints">
                                 <include reference="9OR-UP-EvT"/>
                                 <exclude reference="LmC-j5-0eS"/>
+                                <include reference="lbK-iz-PpR"/>
                                 <include reference="q8j-Hf-PVh"/>
                                 <include reference="sWX-bQ-tKg"/>
-                                <include reference="uJ1-TG-T0A"/>
+                                <exclude reference="uJ1-TG-T0A"/>
                                 <include reference="9DY-bB-Xku"/>
                                 <include reference="i3W-x5-RTa"/>
                                 <exclude reference="o18-Rn-SEc"/>

@@ -64,16 +64,16 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             topMemeText.text = "TOP"
             bottomMemeText.text = "BOTTOM"
         }
-
         // resize the image view so the top and bottom text fields are positioned nicely
-        let availableHeight = self.view.frame.height - self.toolBar.frame.height - 20
+        let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - 44
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
-
     }
+
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
+
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -220,7 +220,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             var newheight = ratio * image.size.height
 
             // don't let the new height get too big or the bottom text falls below the toolbar
-            let availableHeight = self.view.frame.height - self.toolBar.frame.height - 20
+//let availableHeight = self.view.frame.height - self.toolBar.frame.height - 20
+            let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - 44
             if newheight > availableHeight { newheight = availableHeight }
 
             self.imageView.image = image
