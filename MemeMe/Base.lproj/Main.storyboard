@@ -262,13 +262,15 @@
                             </constraint>
                             <constraint firstItem="4M6-Ys-8xE" firstAttribute="top" secondItem="QeF-Pc-yAu" secondAttribute="bottom" constant="11" id="o18-Rn-SEc"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="leading" secondItem="2fe-Tj-OWE" secondAttribute="leadingMargin" constant="8" id="q8j-Hf-PVh">
-                                <variation key="widthClass=compact" constant="0.0"/>
+                                <variation key="widthClass=compact" constant="-16"/>
                             </constraint>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="centerX" secondItem="4M6-Ys-8xE" secondAttribute="centerX" id="sWX-bQ-tKg"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" constant="41" id="uJ1-TG-T0A">
                                 <variation key="widthClass=compact" constant="0.0"/>
                             </constraint>
-                            <constraint firstItem="QeF-Pc-yAu" firstAttribute="trailing" secondItem="2fe-Tj-OWE" secondAttribute="trailingMargin" id="uXK-ER-HiC"/>
+                            <constraint firstItem="QeF-Pc-yAu" firstAttribute="trailing" secondItem="2fe-Tj-OWE" secondAttribute="trailingMargin" id="uXK-ER-HiC">
+                                <variation key="widthClass=compact" constant="16"/>
+                            </constraint>
                             <constraint firstItem="j1A-Lw-jcO" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" id="zq4-2S-gVN"/>
                         </constraints>
                         <variation key="default">
@@ -330,6 +332,7 @@
                         <outlet property="saveButton" destination="kyv-uc-I1o" id="JKF-KE-pcP"/>
                         <outlet property="toolBar" destination="4M6-Ys-8xE" id="0Go-oh-Rlc"/>
                         <outlet property="topMemeText" destination="ylx-m4-Hfs" id="ca0-nA-ViS"/>
+                        <outlet property="topToolbar" destination="j1A-Lw-jcO" id="32W-mu-jpO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cec-m8-jhq" userLabel="First Responder" sceneMemberID="firstResponder"/>

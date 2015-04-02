@@ -30,6 +30,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var topToolbar: UIToolbar!
+
 
     // MARK: -
     // MARK: Load & Dismiss Actions
@@ -66,7 +68,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             bottomMemeText.text = "BOTTOM"
         }
         // resize the image view so the top and bottom text fields are positioned nicely
-        let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
+        let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
     }
 
@@ -200,15 +202,42 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
     */
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+println("∂vwtts size.height=\(size.height), width=\(size.width)")
         let menuHeight = size.height > size.width ? VERTICAL_MARGIN : 4
-        let availableHeight = size.height - (2 * self.toolBar.bounds.size.height) - menuHeight
-        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
+println("∂menu=\(menuHeight)")
+        let availableHeight = size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - menuHeight
+        if let image = self.imageView.image {
+            self.scaleToImageView(self.imageView, forImage: image, inMaxHeight: availableHeight, inMaxWidth: size.width)
+        } else {
+            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
+        }
     }
 
+
+
     private func resizeImageView(newheight: CGFloat) {
+        if let image = self.imageView.image {
+            println("newheight=\(newheight)")
+            println("image.size.height=\(image.size.height)")
+            println("imageView.bounds.size.height=\(imageView.bounds.size.height)\n----------------")
+        }
+
         self.imageViewHeightConstraint.constant = newheight
         self.view.layoutIfNeeded()
     }
+
+
+    private func scaleToImageView(imageView: UIImageView, forImage: UIImage, inMaxHeight: CGFloat, inMaxWidth: CGFloat) {
+        imageView.image = forImage
+        let ratio = inMaxWidth / forImage.size.width
+        var newheight = ratio * forImage.size.height
+
+        // don't let the new height get too big or the bottom text falls below the toolbar
+        if newheight > inMaxHeight { newheight = inMaxHeight; println("•newheight > inMaxHeight:\(newheight)>\(inMaxHeight)") }
+
+        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
+    }
+
 
 
     // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout
@@ -217,16 +246,18 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         self.dismissViewControllerAnimated(true, completion: nil)
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
+            self.scaleToImageView(self.imageView, forImage: image, inMaxHeight: availableHeight, inMaxWidth: imageView.bounds.size.width)
             // resize the UImageView to maximize amount of the new image that shows without going offscreen
-            let ratio = self.imageView.bounds.size.width / image.size.width
-            var newheight = ratio * image.size.height
-
-            // don't let the new height get too big or the bottom text falls below the toolbar
-            let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
-            if newheight > availableHeight { newheight = availableHeight }
-
-            self.imageView.image = image
-            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
+//            let ratio = self.imageView.bounds.size.width / image.size.width
+//            var newheight = ratio * image.size.height
+//
+//            // don't let the new height get too big or the bottom text falls below the toolbar
+//            let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
+//            if newheight > availableHeight { newheight = availableHeight }
+//
+//            self.imageView.image = image
+//            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
         }
     }
 
