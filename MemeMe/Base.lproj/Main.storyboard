@@ -56,6 +56,9 @@
                                         <exclude reference="SdC-uE-HdY"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="mOw-Zm-jdF"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -187,7 +190,6 @@
                                         </variation>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="bottom" secondItem="QeF-Pc-yAu" secondAttribute="bottomMargin" id="06w-Ou-WiS">
                                         <variation key="widthClass=compact" constant="-4"/>
@@ -245,7 +247,6 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="j1A-Lw-jcO" secondAttribute="bottom" constant="16" id="5pO-31-Jk6"/>
                             <constraint firstItem="4M6-Ys-8xE" firstAttribute="leading" secondItem="2fe-Tj-OWE" secondAttribute="leadingMargin" constant="-16" id="9DY-bB-Xku"/>
@@ -271,7 +272,9 @@
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="trailing" secondItem="2fe-Tj-OWE" secondAttribute="trailingMargin" id="uXK-ER-HiC">
                                 <variation key="widthClass=compact" constant="16"/>
                             </constraint>
-                            <constraint firstItem="j1A-Lw-jcO" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" id="zq4-2S-gVN"/>
+                            <constraint firstItem="j1A-Lw-jcO" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" id="zq4-2S-gVN">
+                                <variation key="widthClass=compact" constant="0.0"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

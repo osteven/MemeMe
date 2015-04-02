@@ -17,7 +17,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Properties
     var currentMeme: Meme? = nil
     var memeManager: MemeManager? = nil
-    let VERTICAL_MARGIN: CGFloat = 24.0
+    let VERTICAL_MARGIN: CGFloat = 2.0
 
 
     // MARK: -
@@ -76,12 +76,17 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         subscribeToKeyboardNotifications()
-
     }
 
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.unsubscribeFromKeyboardNotificiations()
+    }
+
+
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 
 
@@ -138,14 +143,21 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        saveButton.enabled = true
-
         // Construct the text that will be in the field if this change is accepted
         var newText = textField.text as NSString
         newText = newText.stringByReplacingCharactersInRange(range, withString: string).uppercaseString
 
         textField.text = newText
+        saveButton.enabled = readyForSave()
         return false
+    }
+
+    private func readyForSave() -> Bool {
+        var s = topMemeText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        if s == "TOP" || s == "" { return false }
+        s = bottomMemeText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        if s == "BOTTOM" || s == "" { return false }
+        return imageView.image != nil
     }
 
     func keyboardWillShow(notification: NSNotification) {
@@ -202,12 +214,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
     */
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-println("∂vwtts size.height=\(size.height), width=\(size.width)")
-        let menuHeight = size.height > size.width ? VERTICAL_MARGIN : 4
-println("∂menu=\(menuHeight)")
-        let availableHeight = size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - menuHeight
+        let availableHeight = size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
         if let image = self.imageView.image {
-            self.scaleToImageView(self.imageView, forImage: image, inMaxHeight: availableHeight, inMaxWidth: size.width)
+            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: size.width)
         } else {
             dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
         }
@@ -216,25 +225,17 @@ println("∂menu=\(menuHeight)")
 
 
     private func resizeImageView(newheight: CGFloat) {
-        if let image = self.imageView.image {
-            println("newheight=\(newheight)")
-            println("image.size.height=\(image.size.height)")
-            println("imageView.bounds.size.height=\(imageView.bounds.size.height)\n----------------")
-        }
-
         self.imageViewHeightConstraint.constant = newheight
         self.view.layoutIfNeeded()
     }
 
 
-    private func scaleToImageView(imageView: UIImageView, forImage: UIImage, inMaxHeight: CGFloat, inMaxWidth: CGFloat) {
-        imageView.image = forImage
-        let ratio = inMaxWidth / forImage.size.width
-        var newheight = ratio * forImage.size.height
+    private func calcScaleforImageToResizeImageView(image: UIImage, inMaxHeight: CGFloat, inMaxWidth: CGFloat) {
+        let ratio = inMaxWidth / image.size.width
+        var newheight = ratio * image.size.height
 
         // don't let the new height get too big or the bottom text falls below the toolbar
-        if newheight > inMaxHeight { newheight = inMaxHeight; println("•newheight > inMaxHeight:\(newheight)>\(inMaxHeight)") }
-
+        if newheight > inMaxHeight { newheight = inMaxHeight }
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
     }
 
@@ -246,18 +247,10 @@ println("∂menu=\(menuHeight)")
         self.dismissViewControllerAnimated(true, completion: nil)
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.imageView.image = image
+            saveButton.enabled = readyForSave()
             let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
-            self.scaleToImageView(self.imageView, forImage: image, inMaxHeight: availableHeight, inMaxWidth: imageView.bounds.size.width)
-            // resize the UImageView to maximize amount of the new image that shows without going offscreen
-//            let ratio = self.imageView.bounds.size.width / image.size.width
-//            var newheight = ratio * image.size.height
-//
-//            // don't let the new height get too big or the bottom text falls below the toolbar
-//            let availableHeight = self.view.bounds.size.height - (2 * self.toolBar.bounds.size.height) - VERTICAL_MARGIN
-//            if newheight > availableHeight { newheight = availableHeight }
-//
-//            self.imageView.image = image
-//            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
+            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: imageView.bounds.size.width)
         }
     }
 

@@ -26,6 +26,13 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         self.navigationItem.rightBarButtonItem = addButton;
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
+    }
+
+
     func presentMemeEditorModal() {
         let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
         editController.memeManager = self.memeManager
