@@ -182,7 +182,7 @@
                                             <constraint firstAttribute="height" constant="32" id="VDA-Bp-seA"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="40"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="AVD-Z7-1JV"/>
@@ -202,7 +202,7 @@
                                             <constraint firstAttribute="height" constant="32" id="otQ-Zf-B9i"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBold" family="Helvetica Neue" pointSize="40"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="otQ-Zf-B9i"/>

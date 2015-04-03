@@ -17,12 +17,12 @@ class MemeManager {
 
 
     init() {
-//        let m1 = ["memetop1", "memetop2", "memetop3", "memetop4"]
-//        let m2 = ["memebot1", "memebot2", "memebot3", "memebot4"]
-//        for (i, m) in enumerate(m1) {
-//            let ms = Meme(top: m, bottom: m2[i])
-//            memeList.append(ms)
-//        }
+        let m1 = ["memetop1", "memetop2", "memetop3", "memetop4"]
+        let m2 = ["memebot1", "memebot2", "memebot3", "memebot4"]
+        for (i, m) in enumerate(m1) {
+            let ms = Meme(top: m, bottom: m2[i])
+            memeList.append(ms)
+        }
     }
 
 
@@ -31,4 +31,6 @@ class MemeManager {
     func memeAtIndex(row: Int) -> Meme { return memeList[row] }
 
     func appendMeme(meme: Meme) { memeList.append(meme) }
+    func removeMemeAtIndex(row: Int) { memeList.removeAtIndex(row) }
+
 }

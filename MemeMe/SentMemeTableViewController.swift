@@ -24,6 +24,9 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("presentMemeEditorModal"))
         self.navigationItem.rightBarButtonItem = addButton;
+
+        let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: Selector("doEditMode"))
+        self.navigationItem.leftBarButtonItem = editButton;
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -33,7 +36,11 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     }
 
 
-    func presentMemeEditorModal() {
+    func doEditMode() {
+               self.tableView.editing = true
+    }
+
+    private func presentMemeEditorModal() {
         let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
         editController.memeManager = self.memeManager
         editController.currentMeme = nil
@@ -74,5 +81,29 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         //   self.presentViewController(controller, animated: true, completion: nil)
     }
 
+//
+//    func tableView(tableView: UITableView, willBeginEditingRowAtIndexPath indexPath: NSIndexPath) {
+//        self.tableView.editing = true
+//    }
+//
+//    func tableView(tableView: UITableView, didEndEditingRowAtIndexPath indexPath: NSIndexPath) {
+//        self.tableView.editing = false
+//    }
+
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if self.tableView.editing {
+            return UITableViewCellEditingStyle.Delete
+        }
+        return UITableViewCellEditingStyle.None
+    }
+
+
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            self.memeManager.removeMemeAtIndex(indexPath.row)
+            self.tableView.editing = false
+            self.tableView.reloadData()
+        }
+    }
 
 }
