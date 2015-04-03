@@ -16,7 +16,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
-    var currentMemeImage: UIImage? = nil
     var memeManager: MemeManager? = nil
     let VERTICAL_MARGIN: CGFloat = 2.0
 
