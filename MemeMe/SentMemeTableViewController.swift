@@ -1,6 +1,6 @@
 //
 //  SentMemeTableViewController.swift
-//  MemeMeV1
+//  MemeMe
 //
 //  Created by Steven O'Toole on 3/20/15.
 //  Copyright (c) 2015 Steven O'Toole. All rights reserved.

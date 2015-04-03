@@ -16,6 +16,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
+    var currentMemeImage: UIImage? = nil
     var memeManager: MemeManager? = nil
     let VERTICAL_MARGIN: CGFloat = 2.0
 
@@ -96,22 +97,34 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     @IBAction func doSave(sender: UIBarButtonItem) {
+        let memeImage = generateMemedImage()
+        let shareArray = [memeImage]
+        let activityVC = UIActivityViewController(activityItems: shareArray, applicationActivities: nil)
+
+        activityVC.completionWithItemsHandler = { activity, success, items, error in
+            if success {
+                self.saveSentMeme(memeImage)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+        self.presentViewController(activityVC, animated: true, completion: nil)
+     }
+
+    private func saveSentMeme(memeImage: UIImage) {
         if let meme = currentMeme {
             // editing a sent meme
             meme.topString = topMemeText.text
             meme.bottomString = bottomMemeText.text
             meme.originalImage = imageView.image
-            meme.memedImage = generateMemedImage()
+            meme.memedImage = memeImage
         } else {
             // new meme
             currentMeme = Meme(top: topMemeText.text, bottom: bottomMemeText.text)
             currentMeme!.originalImage = imageView.image
-            currentMeme!.memedImage = generateMemedImage()
+            currentMeme!.memedImage = memeImage
             memeManager!.appendMeme(currentMeme!)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
-
 
 
     private func generateMemedImage() -> UIImage {
@@ -200,7 +213,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
-            if choice == "Pick" {
+            if choice == "Album" {
                 pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             } else {
                 pickerController.sourceType = UIImagePickerControllerSourceType.Camera
