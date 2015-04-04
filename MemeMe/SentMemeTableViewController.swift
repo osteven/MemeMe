@@ -24,7 +24,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("presentMemeEditorModal"))
         self.navigationItem.leftBarButtonItem = addButton;
-        self.navigationItem.rightBarButtonItem = self.editButtonItem() // editButton;
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -33,12 +33,13 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         dispatch_async(dispatch_get_main_queue(), { self.tableView.reloadData() })
     }
 
+
+    /*
+    Edit view controller knows how to present itself in a class function.  This eliminates duplicate code 
+    between the list and the grid views
+    */
     func presentMemeEditorModal() {
-        self.editing = false
-        let editController = self.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
-        editController.memeManager = self.memeManager
-        editController.currentMeme = nil
-        self.presentViewController(editController, animated: true, completion: nil)
+        EditMemeViewController.presentForAddingNewMeme(self)
     }
 
 

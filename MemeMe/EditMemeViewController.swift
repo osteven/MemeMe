@@ -16,8 +16,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
-    var memeManager: MemeManager? = nil
+    //    var memeManager: MemeManager? = nil
     let VERTICAL_MARGIN: CGFloat = 2.0
+    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
 
 
     // MARK: -
@@ -34,12 +35,28 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
 
 
+
+    // MARK: -
+    // MARK: Class function
+    /*
+    Edit view controller knows how to present itself in a class function.  This eliminates duplicate code
+    between the list and the grid views
+    */
+    class func presentForAddingNewMeme(sourceController: UIViewController) {
+        sourceController.editing = false
+        let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
+        editController.currentMeme = nil
+        sourceController.presentViewController(editController, animated: true, completion: nil)
+    }
+
+
+
     // MARK: -
     // MARK: Load & Dismiss Actions
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        assert(memeManager != nil, "Need to set memeManager in EditMemeViewController")
+        //       assert(memeManager != nil, "Need to set memeManager in EditMemeViewController")
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         saveButton.enabled = false
         topMemeText.delegate = self
@@ -121,7 +138,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             currentMeme = Meme(top: topMemeText.text, bottom: bottomMemeText.text)
             currentMeme!.originalImage = imageView.image
             currentMeme!.memedImage = memeImage
-            memeManager!.appendMeme(currentMeme!)
+            memeManager.appendMeme(currentMeme!)
         }
     }
 

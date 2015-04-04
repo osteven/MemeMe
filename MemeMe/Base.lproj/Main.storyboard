@@ -441,32 +441,55 @@
         <scene sceneID="bej-V2-4gB">
             <objects>
                 <collectionViewController title="Sent Memes Grid" id="cWa-j3-kc0" customClass="MemeGridViewController" customModule="MemeMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7eh-Gt-RQ5">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" dataMode="prototypes" id="7eh-Gt-RQ5">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="iEn-ep-DS5">
-                            <size key="itemSize" width="80" height="80"/>
+                            <size key="itemSize" width="108" height="108"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SentMemeCollectionCell" id="LQQ-iL-g5M">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SentMemeCollectionCell" id="LQQ-iL-g5M" customClass="MemeCollectionViewCell" customModule="MemeMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="108" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uzz-8a-S5F">
+                                            <rect key="frame" x="-2" y="25" width="112" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aaf-eM-M48">
+                                            <rect key="frame" x="-2" y="63" width="112" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmG-r3-zKd">
+                                            <rect key="frame" x="2" y="2" width="104" height="104"/>
+                                        </imageView>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <outlet property="bottomLabel" destination="Aaf-eM-M48" id="0zK-WB-fR5"/>
+                                    <outlet property="imageView" destination="YmG-r3-zKd" id="rfu-fW-1Lf"/>
+                                    <outlet property="topLabel" destination="Uzz-8a-S5F" id="2Lj-St-yhj"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="cWa-j3-kc0" id="S91-Bf-pPi"/>
-                            <outlet property="delegate" destination="cWa-j3-kc0" id="n0T-lI-AES"/>
+                            <outlet property="dataSource" destination="cWa-j3-kc0" id="qBf-N8-A9W"/>
+                            <outlet property="delegate" destination="cWa-j3-kc0" id="yS7-Zy-9ZS"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="ra1-6Q-m4Q"/>
+                    <navigationItem key="navigationItem" title="Sent Memes" id="ra1-6Q-m4Q"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ic3-K3-xTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

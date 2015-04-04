@@ -8,23 +8,24 @@
 
 import UIKit
 
-let reuseIdentifier = "Cell"
 
-class MemeGridViewController: UICollectionViewController {
+class MemeGridViewController: UICollectionViewController, UICollectionViewDelegate {
 
     // MARK: -
     // MARK: Properties & Outlets
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
-
+    private let reuseIdentifier = "SentMemeCollectionCell"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
+        //     self.collectionView!.allowsSelection = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //      self.collectionView!.registerClass(MemeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -56,28 +57,65 @@ class MemeGridViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as UICollectionViewCell
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as MemeCollectionViewCell
+
+        let meme = memeManager.memeAtIndex(indexPath.row)
+        if let i = meme.memedImage {
+            cell.imageView.image = i
+            cell.topLabel.hidden = true
+            cell.bottomLabel.hidden = true
+            cell.imageView.hidden = false
+        } else {
+            cell.topLabel.text = meme.topString
+            cell.bottomLabel.text = meme.bottomString
+            cell.topLabel.hidden = false
+            cell.bottomLabel.hidden = false
+            cell.imageView.hidden = true
+        }
+
+
         return cell
     }
 
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // TODO: fill
+
+    }
+
+
     // MARK: UICollectionViewDelegate
 
-    /*
+
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    */
 
-    /*
+
+
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
-    */
+
+    override func collectionView(collectionView: UICollectionView, didHighlightItemAtIndexPath indexPath: NSIndexPath) {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+            cell.contentView.backgroundColor = UIColor(red: 173.0, green: 216.0, blue: 230.0, alpha: 0.5)
+
+        }
+    }
+
+    override func collectionView(collectionView: UICollectionView, didUnhighlightItemAtIndexPath indexPath: NSIndexPath) {
+        if let cell = collectionView.cellForItemAtIndexPath(indexPath) {
+            cell.contentView.backgroundColor = nil
+        }
+    }
+
+
+
+
+
+
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item

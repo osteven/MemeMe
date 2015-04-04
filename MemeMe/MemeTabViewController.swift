@@ -33,7 +33,7 @@ class MemeTabViewController: UITabBarController {
 
         if let currentSelectedTabVC = self.selectedViewController {
             let editController = currentSelectedTabVC.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
-            editController.memeManager = self.memeManager
+            //        editController.memeManager = self.memeManager
             editController.currentMeme = nil
             currentSelectedTabVC.presentViewController(editController, animated: true, completion: nil)
         }
