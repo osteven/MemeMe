@@ -23,8 +23,8 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
 
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("presentMemeEditorModal"))
-        self.navigationItem.rightBarButtonItem = addButton;
-        self.navigationItem.leftBarButtonItem = self.editButtonItem() // editButton;
+        self.navigationItem.leftBarButtonItem = addButton;
+        self.navigationItem.rightBarButtonItem = self.editButtonItem() // editButton;
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -49,14 +49,22 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         return memeManager.numberOfMemes()
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") as UITableViewCell
         let meme = memeManager.memeAtIndex(indexPath.row)
+
+
+//        cell.separatorInset = UIEdgeInsetsZero
+//        cell.preservesSuperviewLayoutMargins = true
+//        cell.layoutMargins = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
+
 
         cell.textLabel?.text = meme.topString
         if let i = meme.memedImage {
             cell.imageView?.image = i
+//            cell.imageView?.contentMode = .Center
+//            cell.imageView?.bounds.size.height = 30.0
         }
 
         if let detailTextLabel = cell.detailTextLabel {
@@ -66,13 +74,10 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //    self.presentMemeEditorModal(memeManager.memeAtIndex(indexPath.row))
-
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as MemeDetailViewController
         controller.memeManager = self.memeManager
         controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
         self.navigationController?.pushViewController(controller, animated: true)
-        //   self.presentViewController(controller, animated: true, completion: nil)
     }
 
 
@@ -93,9 +98,9 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.memeManager.removeMemeAtIndex(indexPath.row)
-            // self.tableView.editing = false
             self.tableView.reloadData()
         }
     }
+
 
 }
