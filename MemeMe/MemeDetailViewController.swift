@@ -12,7 +12,7 @@ class MemeDetailViewController: UIViewController     {
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
-    var memeManager: MemeManager? = nil
+//    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
 
     @IBOutlet weak var imageView: UIImageView!
 

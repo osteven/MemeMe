@@ -15,36 +15,37 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
     // MARK: Properties & Outlets
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
     private let reuseIdentifier = "SentMemeCollectionCell"
+    private var isEditing = false
 
+
+    // MARK: -
+    // MARK: Loading & showing the editor
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        //     self.collectionView!.allowsSelection = true
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        //      self.collectionView!.registerClass(MemeCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("presentMemeEditorModal"))
+        self.navigationItem.leftBarButtonItem = addButton;
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
+    Edit view controller knows how to present itself in a class function.  This eliminates duplicate code
+    between the list and the grid views
     */
+    func presentMemeEditorModal() {
+        EditMemeViewController.presentForAddingNewMeme(self)
+    }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        dispatch_async(dispatch_get_main_queue(), { self.collectionView!.reloadData() })
+    }
+    
+
+
+
+    // MARK: -
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -59,6 +60,9 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as MemeCollectionViewCell
 
+        cell.deleteButton.hidden = !self.isEditing
+        cell.deleteButton.tag = indexPath.row
+
         let meme = memeManager.memeAtIndex(indexPath.row)
         if let i = meme.memedImage {
             cell.imageView.image = i
@@ -72,28 +76,41 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
             cell.bottomLabel.hidden = false
             cell.imageView.hidden = true
         }
-
-
         return cell
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // TODO: fill
-
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as MemeDetailViewController
+        controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 
 
+    /*
+    This is the action for the delete button in the collection item prototype.  Each button's tag is set
+    in collectionView cellForItemAtIndexPath, along with the hidden state.  If not in editing, the delete
+    buttons are hidden.
+    */
+    @IBAction func doDelete(sender: UIButton) {
+        assert(self.isEditing)
+        self.memeManager.removeMemeAtIndex(sender.tag)
+        self.collectionView!.reloadData()
+    }
+
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.isEditing = editing
+        self.collectionView!.reloadData()
+    }
+
+
+    // MARK: -
     // MARK: UICollectionViewDelegate
 
-
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
 
-
-
-    // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -114,22 +131,5 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
 
 
 
-
-
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 }

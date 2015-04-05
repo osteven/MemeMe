@@ -76,7 +76,6 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as MemeDetailViewController
-        controller.memeManager = self.memeManager
         controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
         self.navigationController?.pushViewController(controller, animated: true)
     }
