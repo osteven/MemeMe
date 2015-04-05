@@ -26,8 +26,10 @@ class MemeDetailViewController: UIViewController     {
         self.navigationItem.leftItemsSupplementBackButton = true
         let deleteButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: Selector("deleteMeme"))
         let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: Selector("presentMemeEditorForEditModal"))
-        self.navigationItem.leftBarButtonItem = editButton
-        self.navigationItem.rightBarButtonItem = deleteButton
+
+        let items = [deleteButton, editButton]
+        self.navigationItem.rightBarButtonItems = items
+
     }
 
 
