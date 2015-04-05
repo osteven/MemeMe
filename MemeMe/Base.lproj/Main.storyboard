@@ -399,6 +399,9 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="up1-oX-cUc">
                                 <rect key="frame" x="0.0" y="56" width="600" height="544"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="544" id="Acz-LC-dUe"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -408,9 +411,15 @@
                             <constraint firstItem="up1-oX-cUc" firstAttribute="leading" secondItem="K0m-nG-1Qw" secondAttribute="leadingMargin" constant="-16" id="B2t-GK-ZjC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="up1-oX-cUc" secondAttribute="trailing" constant="-16" id="xLR-YB-BnJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2JY-DR-4Lu"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="up1-oX-cUc" id="1zD-7H-yHS"/>
+                        <outlet property="imageViewHeightConstraint" destination="Acz-LC-dUe" id="Hyk-Vk-liB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKu-QM-0It" userLabel="First Responder" sceneMemberID="firstResponder"/>

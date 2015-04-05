@@ -85,8 +85,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             bottomMemeText.text = "BOTTOM"
         }
         // resize the image view so the top and bottom text fields are positioned nicely
-        let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
-        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
+        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(self.getAvailableHeight()) })
     }
 
 
@@ -101,7 +100,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
 
-
+    // There's more room for the image if you hide the status bar.  If this is not set
+    // to true, have to change getAvailableHeight() to subtract the height of the status bar
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -243,7 +243,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
     */
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        let availableHeight = size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
+        let availableHeight = getAvailableHeight(size.height)
         if let image = self.imageView.image {
             self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: size.width)
         } else {
@@ -252,6 +252,11 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
 
+    // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size
+    private func getAvailableHeight() -> CGFloat { return getAvailableHeight(self.view.bounds.size.height) }
+    private func getAvailableHeight(rawHeight: CGFloat) -> CGFloat {
+        return rawHeight - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
+    }
 
     private func resizeImageView(newheight: CGFloat) {
         self.imageViewHeightConstraint.constant = newheight
@@ -278,8 +283,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = image
             saveButton.enabled = readyForSave()
-            let availableHeight = self.view.bounds.size.height - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
-            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: imageView.bounds.size.width)
+            self.calcScaleforImageToResizeImageView(image, inMaxHeight: getAvailableHeight(), inMaxWidth: imageView.bounds.size.width)
         }
     }
 
