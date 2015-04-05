@@ -87,7 +87,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         // resize the image view so the top and bottom text fields are positioned nicely
         self.calcScaleforImageToResizeImageView(self.imageView.image, inMaxHeight: self.getAvailableHeight(),
-                inMaxWidth: self.view.bounds.size.width)
+            inMaxWidth: getActualWidth(self.view))
     }
 
 
@@ -142,6 +142,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             memeManager.appendMeme(currentMeme!)
         }
     }
+
+
 
 
     private func generateMemedImage() -> UIImage {
@@ -275,8 +277,20 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
 
+
+    private func getActualWidth(inView: UIView) -> CGFloat {
+        var realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        return realWidth
+    }
+
+
     // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size
-    private func getAvailableHeight() -> CGFloat { return getAvailableHeight(self.view.bounds.size.height) }
+    private func getAvailableHeight() -> CGFloat {
+        // it looks like the view bounds height and width don't swap anymore when you change orientation
+        // I don't know how best to get the available height when we are rotated, so just use the screen bounds which does swap
+       return getAvailableHeight(UIScreen.mainScreen().bounds.size.height)
+    }
+
     private func getAvailableHeight(rawHeight: CGFloat) -> CGFloat {
         return rawHeight - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
     }

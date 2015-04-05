@@ -15,8 +15,8 @@ class MemeDetailViewController: UIViewController     {
     private let VERTICAL_MARGIN: CGFloat = 2.0
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
-
     @IBOutlet weak var imageView: UIImageView!
+
 
     // MARK: -
     // MARK: Load 
@@ -29,7 +29,6 @@ class MemeDetailViewController: UIViewController     {
 
         let items = [deleteButton, editButton]
         self.navigationItem.rightBarButtonItems = items
-
     }
 
 
@@ -38,10 +37,8 @@ class MemeDetailViewController: UIViewController     {
         if let meme = currentMeme {
             if let image = meme.memedImage {
                 imageView.image = image
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.calcScaleforImageToResizeImageView(image, inMaxHeight: self.getAvailableHeight(),
-                        inMaxWidth: self.imageView.bounds.size.width)
-                })
+                self.calcScaleforImageToResizeImageView(self.imageView.image!, inMaxHeight: self.getAvailableHeight(),
+                    inMaxWidth: getActualWidth(self.view))
             }
         }
     }
@@ -76,9 +73,13 @@ class MemeDetailViewController: UIViewController     {
     // MARK: -
     // MARK: Resize UIImageView for best fit of UIImage in available space
 
+    private func getActualWidth(inView: UIView) -> CGFloat {
+        var realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        return realWidth
+    }
 
-    /* Resize the image view when user goes switches between portrait and landscape.  This also will
-    re-position the top and bottom text fields.
+
+    /* Resize the image view when user goes switches between portrait and landscape.  
     Source ideas:
     http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
     */
@@ -95,7 +96,6 @@ class MemeDetailViewController: UIViewController     {
     // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size
     private func getAvailableHeight() -> CGFloat { return getAvailableHeight(self.view.bounds.size.height) }
     private func getAvailableHeight(rawHeight: CGFloat) -> CGFloat {
-        //   CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
         let tabHeight = self.tabBarController!.tabBar.bounds.height
         let navHeight = self.navigationController!.navigationBar.bounds.height
         return rawHeight - navHeight - tabHeight - VERTICAL_MARGIN
