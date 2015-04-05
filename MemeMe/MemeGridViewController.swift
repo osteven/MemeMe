@@ -33,7 +33,7 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
     between the list and the grid views
     */
     func presentMemeEditorModal() {
-        EditMemeViewController.presentForAddingNewMeme(self)
+        EditMemeViewController.presentForAddingOrEditingMeme(self)
     }
 
     override func viewDidAppear(animated: Bool) {

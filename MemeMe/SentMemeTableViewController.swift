@@ -23,7 +23,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
 
         let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("presentMemeEditorModal"))
-        self.navigationItem.leftBarButtonItem = addButton;
+        self.navigationItem.leftBarButtonItem = addButton
         self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
@@ -39,7 +39,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     between the list and the grid views
     */
     func presentMemeEditorModal() {
-        EditMemeViewController.presentForAddingNewMeme(self)
+        EditMemeViewController.presentForAddingOrEditingMeme(self)
     }
 
 

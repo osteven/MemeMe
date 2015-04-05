@@ -41,10 +41,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     Edit view controller knows how to present itself in a class function.  This eliminates duplicate code
     between the list and the grid views
     */
-    class func presentForAddingNewMeme(sourceController: UIViewController) {
+    class func presentForAddingOrEditingMeme(sourceController: UIViewController, editMeme: Meme? = nil) {
         sourceController.editing = false
         let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
-        editController.currentMeme = nil
+        editController.currentMeme = editMeme
         sourceController.presentViewController(editController, animated: true, completion: nil)
     }
 
@@ -80,12 +80,14 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         if let meme = currentMeme {
             topMemeText.text = meme.topString
             bottomMemeText.text = meme.bottomString
+            if let i = meme.originalImage { imageView.image = i }
         } else {
             topMemeText.text = "TOP"
             bottomMemeText.text = "BOTTOM"
         }
         // resize the image view so the top and bottom text fields are positioned nicely
-        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(self.getAvailableHeight()) })
+        self.calcScaleforImageToResizeImageView(self.imageView.image, inMaxHeight: self.getAvailableHeight(),
+                inMaxWidth: self.view.bounds.size.width)
     }
 
 
@@ -222,7 +224,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
 
     // MARK: -
-    // MARK: UImage Picker support
+    // MARK: UIImage Picker support
     @IBAction func getImageAction(sender: UIBarButtonItem) {
         if let choice = sender.title {
 
@@ -236,6 +238,27 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(pickerController, animated: true, completion: nil)
         }
     }
+
+    // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout
+    // http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
+    internal func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.imageView.image = image
+            saveButton.enabled = readyForSave()
+            self.calcScaleforImageToResizeImageView(image, inMaxHeight: getAvailableHeight(), inMaxWidth: imageView.bounds.size.width)
+        }
+    }
+
+
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
+
+    // MARK: -
+    // MARK: Resize UIImageView for best fit of UIImage in available space
 
     /* Resize the image view when user goes switches between portrait and landscape.  This also will
     re-position the top and bottom text fields.
@@ -264,32 +287,17 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
 
-    private func calcScaleforImageToResizeImageView(image: UIImage, inMaxHeight: CGFloat, inMaxWidth: CGFloat) {
-        let ratio = inMaxWidth / image.size.width
-        var newheight = ratio * image.size.height
+    // if we have an image, scale the imageview to its width, else just fit the imageview in max available height
+    private func calcScaleforImageToResizeImageView(image: UIImage?, inMaxHeight: CGFloat, inMaxWidth: CGFloat) {
+        var newheight = inMaxHeight
+        if let img = image {
+            let ratio = inMaxWidth / img.size.width
+            newheight = ratio * img.size.height
 
-        // don't let the new height get too big or the bottom text falls below the toolbar
-        if newheight > inMaxHeight { newheight = inMaxHeight }
-        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
-    }
-
-
-
-    // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout
-    // http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
-    internal func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageView.image = image
-            saveButton.enabled = readyForSave()
-            self.calcScaleforImageToResizeImageView(image, inMaxHeight: getAvailableHeight(), inMaxWidth: imageView.bounds.size.width)
+            // don't let the new height get too big or the bottom text falls below the toolbar
+            if newheight > inMaxHeight { newheight = inMaxHeight }
         }
-    }
-
-
-    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
     }
 
 

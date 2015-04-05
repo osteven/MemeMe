@@ -13,7 +13,7 @@ class MemeDetailViewController: UIViewController     {
     // MARK: Properties
     var currentMeme: Meme? = nil
     private let VERTICAL_MARGIN: CGFloat = 2.0
-//    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
+    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var imageView: UIImageView!
@@ -23,12 +23,24 @@ class MemeDetailViewController: UIViewController     {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.leftItemsSupplementBackButton = true
+        let deleteButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Trash, target: self, action: Selector("deleteMeme"))
+        let editButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Edit, target: self, action: Selector("presentMemeEditorForEditModal"))
+        self.navigationItem.leftBarButtonItem = editButton
+        self.navigationItem.rightBarButtonItem = deleteButton
+    }
+
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if let meme = currentMeme {
-            imageView.image = meme.memedImage
-            dispatch_async(dispatch_get_main_queue(), {
-                self.calcScaleforImageToResizeImageView(self.imageView.image!, inMaxHeight: self.getAvailableHeight(),
-                    inMaxWidth: self.imageView.bounds.size.width)
-            })
+            if let image = meme.memedImage {
+                imageView.image = image
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.calcScaleforImageToResizeImageView(image, inMaxHeight: self.getAvailableHeight(),
+                        inMaxWidth: self.imageView.bounds.size.width)
+                })
+            }
         }
     }
 
@@ -38,6 +50,44 @@ class MemeDetailViewController: UIViewController     {
         return true
     }
 
+
+    // MARK: -
+    // MARK: Edit & Delete
+    // note: these two functions are assigned to UIBarButtonItem Selectors and cannot be private
+    func deleteMeme() {
+        memeManager.removeMeme(self.currentMeme)
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
+
+    /*
+    Edit view controller knows how to present itself in a class function.  This eliminates duplicate code
+    between the list and the grid views
+    */
+    func presentMemeEditorForEditModal() {
+        EditMemeViewController.presentForAddingOrEditingMeme(self, editMeme: currentMeme)
+    }
+
+
+
+
+    // MARK: -
+    // MARK: Resize UIImageView for best fit of UIImage in available space
+
+
+    /* Resize the image view when user goes switches between portrait and landscape.  This also will
+    re-position the top and bottom text fields.
+    Source ideas:
+    http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
+    */
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        let availableHeight = getAvailableHeight(size.height)
+        if let image = self.imageView.image {
+            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: size.width)
+        } else {
+            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
+        }
+    }
 
 
     // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size

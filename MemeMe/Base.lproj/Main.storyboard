@@ -25,6 +25,7 @@
                                     <constraint firstAttribute="width" constant="600" id="SdC-uE-HdY"/>
                                     <constraint firstAttribute="width" id="cx9-uy-rvh"/>
                                 </constraints>
+                                <color key="separatorColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="SentMemeTableCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SentMemeTableCell" textLabel="pmi-bL-NW2" detailTextLabel="WV7-aq-SAE" rowHeight="48" style="IBUITableViewCellStyleSubtitle" id="IoS-4D-n4a">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -44,7 +45,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <variation key="default">
@@ -71,7 +74,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66003895990000006" green="0.78317212300000005" blue="0.70319773620000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="QQQ-6C-oeY" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="6" id="0bD-yo-prL"/>
                             <constraint firstAttribute="bottomMargin" secondItem="QQQ-6C-oeY" secondAttribute="bottom" constant="-6" id="4vn-ob-SYE"/>
@@ -259,6 +262,7 @@
                                 </variation>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="j1A-Lw-jcO" firstAttribute="leading" secondItem="2fe-Tj-OWE" secondAttribute="leadingMargin" constant="-16" id="0qR-Vy-3nd"/>
                             <constraint firstItem="4M6-Ys-8xE" firstAttribute="width" secondItem="QeF-Pc-yAu" secondAttribute="width" id="23N-4u-tdR"/>
@@ -404,7 +408,6 @@
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="L8Q-b1-WYp" firstAttribute="top" secondItem="up1-oX-cUc" secondAttribute="bottom" id="1g1-n4-lzs"/>
                             <constraint firstItem="up1-oX-cUc" firstAttribute="top" secondItem="K0m-nG-1Qw" secondAttribute="topMargin" constant="56" id="2JY-DR-4Lu"/>
@@ -516,10 +519,10 @@
             </objects>
             <point key="canvasLocation" x="1040" y="1370"/>
         </scene>
-        <!--Table-->
+        <!--Table Navigation Controller-->
         <scene sceneID="R6g-kT-j4c">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Iti-c3-aUP" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Iti-c3-aUP" userLabel="Table Navigation Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Table" image="table" id="vKZ-cF-ZaJ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZZs-ME-iIG">
@@ -535,10 +538,10 @@
             </objects>
             <point key="canvasLocation" x="214" y="392"/>
         </scene>
-        <!--Grid-->
+        <!--Grid Navigation Controller-->
         <scene sceneID="Qwa-SM-uQ1">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B3A-fm-6S1" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="B3A-fm-6S1" userLabel="Grid Navigation Controller" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Grid" image="collection" id="QkO-9X-7RK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Zua-p0-2ab">
