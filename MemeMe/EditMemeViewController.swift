@@ -16,6 +16,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
+    private let ALBUM_TAG = 2
     private let VERTICAL_MARGIN: CGFloat = 2.0
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
 
@@ -227,17 +228,15 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: UIImage Picker support
     @IBAction func getImageAction(sender: UIBarButtonItem) {
-        if let choice = sender.title {
 
-            let pickerController = UIImagePickerController()
-            pickerController.delegate = self
-            if choice == "Album" {
-                pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-            } else {
-                pickerController.sourceType = UIImagePickerControllerSourceType.Camera
-            }
-            self.presentViewController(pickerController, animated: true, completion: nil)
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        if sender.tag == ALBUM_TAG {
+            pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        } else {
+            pickerController.sourceType = UIImagePickerControllerSourceType.Camera
         }
+        self.presentViewController(pickerController, animated: true, completion: nil)
     }
 
     // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout

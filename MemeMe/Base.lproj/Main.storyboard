@@ -163,14 +163,14 @@
                                 <rect key="frame" x="-2" y="556" width="604" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7wQ-t3-9Fs"/>
-                                    <barButtonItem systemItem="camera" id="gW2-vm-1vc">
+                                    <barButtonItem tag="1" systemItem="camera" id="gW2-vm-1vc">
                                         <connections>
                                             <action selector="getImageAction:" destination="Y7d-Vy-niU" id="KFj-zC-09N"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="XmS-eR-1Ca"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="DdW-U6-vJU"/>
-                                    <barButtonItem title="Album" id="9yW-Ox-fco">
+                                    <barButtonItem tag="2" title="Album" id="9yW-Ox-fco">
                                         <connections>
                                             <action selector="getImageAction:" destination="Y7d-Vy-niU" id="0LB-NP-BKi"/>
                                         </connections>
