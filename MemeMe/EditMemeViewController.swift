@@ -227,17 +227,36 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // MARK: -
     // MARK: UIImage Picker support
+
+    /*
+    Getting an error when I show the Camera on the device:
+    http://stackoverflow.com/questions/18890003/uiimagepickercontroller-error-snapshotting-a-view-that-has-not-been-rendered-re
+    So I broke out a showCamera function after a delay.
+    */
     @IBAction func getImageAction(sender: UIBarButtonItem) {
 
+        if sender.tag == ALBUM_TAG {
+            let pickerController = UIImagePickerController()
+            pickerController.delegate = self
+            pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            self.presentViewController(pickerController, animated: true, completion: nil)
+        } else {
+            let delayInSeconds = Int64(0.3 * Double(NSEC_PER_SEC));
+            dispatch_time(DISPATCH_TIME_NOW, delayInSeconds);
+            dispatch_async(dispatch_get_main_queue(), { self.showCamera() })
+       }
+    }
+
+
+
+    func showCamera() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        if sender.tag == ALBUM_TAG {
-            pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        } else {
-            pickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        }
+        pickerController.sourceType = UIImagePickerControllerSourceType.Camera
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
+
+
 
     // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout
     // http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
