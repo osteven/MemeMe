@@ -231,6 +231,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     /*
     Getting an error when I show the Camera on the device:
     http://stackoverflow.com/questions/18890003/uiimagepickercontroller-error-snapshotting-a-view-that-has-not-been-rendered-re
+    http://stackoverflow.com/questions/25884801/ios-8-snapshotting-a-view-that-has-not-been-rendered-results-in-an-empty-snapsho?lq=1
     So I broke out a showCamera function after a delay.
     */
     @IBAction func getImageAction(sender: UIBarButtonItem) {
@@ -241,18 +242,24 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             pickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
             self.presentViewController(pickerController, animated: true, completion: nil)
         } else {
-            let delayInSeconds = Int64(0.3 * Double(NSEC_PER_SEC));
-            dispatch_time(DISPATCH_TIME_NOW, delayInSeconds);
-            dispatch_async(dispatch_get_main_queue(), { self.showCamera() })
+            self.showCamera()
+//            let delayInSeconds = Int64(3 * Double(NSEC_PER_SEC));
+//            dispatch_time(DISPATCH_TIME_NOW, delayInSeconds);
+//            dispatch_async(dispatch_get_main_queue(), { self.showCamera() })
        }
     }
 
 
-
+    /*
+    I tried calling after a delay, but it does not fix the problem.  Also tried modalPresentationStyle = 
+    CurrentContext.  Also tried modalPresentationStyle = FullScreen.  Nothing works.
+    */
     func showCamera() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        //pickerController.modalPresentationStyle = .FullScreen // UIModalPresentationFullScreen
         pickerController.sourceType = UIImagePickerControllerSourceType.Camera
+        //    pickerController.allowsEditing = true
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
 
