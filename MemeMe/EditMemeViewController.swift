@@ -29,7 +29,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var topToolbar: UIToolbar!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!\
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
 
 
