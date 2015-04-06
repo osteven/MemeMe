@@ -163,7 +163,11 @@
                                 <rect key="frame" x="-2" y="556" width="604" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7wQ-t3-9Fs"/>
-                                    <barButtonItem systemItem="camera" id="gW2-vm-1vc"/>
+                                    <barButtonItem systemItem="camera" id="gW2-vm-1vc">
+                                        <connections>
+                                            <action selector="getImageAction:" destination="Y7d-Vy-niU" id="KFj-zC-09N"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="XmS-eR-1Ca"/>
                                     <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="DdW-U6-vJU"/>
                                     <barButtonItem title="Album" id="9yW-Ox-fco">
@@ -376,7 +380,7 @@
                     </view>
                     <connections>
                         <outlet property="bottomMemeText" destination="P9Y-RL-LAv" id="Sjp-tl-gaZ"/>
-                        <outlet property="cameraButton" destination="gW2-vm-1vc" id="Oe9-tg-VNP"/>
+                        <outlet property="cameraButton" destination="gW2-vm-1vc" id="xTX-ug-czJ"/>
                         <outlet property="imageView" destination="QeF-Pc-yAu" id="2mF-gn-nMe"/>
                         <outlet property="imageViewHeightConstraint" destination="1E7-eC-D7l" id="yQG-7Y-CNj"/>
                         <outlet property="saveButton" destination="HYc-ec-yZK" id="2Fk-Og-Nd9"/>
