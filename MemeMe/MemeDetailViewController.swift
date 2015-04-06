@@ -12,11 +12,9 @@ class MemeDetailViewController: UIViewController     {
     // MARK: -
     // MARK: Properties
     var currentMeme: Meme? = nil
-    private let VERTICAL_MARGIN: CGFloat = 2.0
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageView: UIImageView!
-
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: -
     // MARK: Load 
@@ -79,26 +77,11 @@ class MemeDetailViewController: UIViewController     {
     }
 
 
-    /* Resize the image view when user goes switches between portrait and landscape.  
-    Source ideas:
-    http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
-    */
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        let availableHeight = getAvailableHeight(size.height)
-        if let image = self.imageView.image {
-            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: size.width)
-        } else {
-            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
-        }
-    }
-
-
-    // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size
     private func getAvailableHeight() -> CGFloat { return getAvailableHeight(self.view.bounds.size.height) }
     private func getAvailableHeight(rawHeight: CGFloat) -> CGFloat {
         let tabHeight = self.tabBarController!.tabBar.bounds.height
         let navHeight = self.navigationController!.navigationBar.bounds.height
-        return rawHeight - navHeight - tabHeight - VERTICAL_MARGIN
+        return rawHeight - navHeight - tabHeight
     }
 
     private func resizeImageView(newheight: CGFloat) {
@@ -115,6 +98,6 @@ class MemeDetailViewController: UIViewController     {
         if newheight > inMaxHeight { newheight = inMaxHeight }
         dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(newheight) })
     }
-    
+
 
 }

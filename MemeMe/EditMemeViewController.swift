@@ -17,7 +17,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Properties
     var currentMeme: Meme? = nil
     private let ALBUM_TAG = 2
-    private let VERTICAL_MARGIN: CGFloat = 2.0
     private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
 
 
@@ -30,9 +29,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var topToolbar: UIToolbar!
-    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
-
+    @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
 
 
     // MARK: -
@@ -228,14 +226,8 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: UIImage Picker support
 
-    /*
-    Getting an error when I show the Camera on the device:
-    http://stackoverflow.com/questions/18890003/uiimagepickercontroller-error-snapshotting-a-view-that-has-not-been-rendered-re
-    http://stackoverflow.com/questions/25884801/ios-8-snapshotting-a-view-that-has-not-been-rendered-results-in-an-empty-snapsho?lq=1
-    So I broke out a showCamera function after a delay.
-    */
-    @IBAction func getImageAction(sender: UIBarButtonItem) {
 
+    @IBAction func getImageAction(sender: UIBarButtonItem) {
         if sender.tag == ALBUM_TAG {
             let pickerController = UIImagePickerController()
             pickerController.delegate = self
@@ -243,23 +235,23 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
             self.presentViewController(pickerController, animated: true, completion: nil)
         } else {
             self.showCamera()
-//            let delayInSeconds = Int64(3 * Double(NSEC_PER_SEC));
-//            dispatch_time(DISPATCH_TIME_NOW, delayInSeconds);
-//            dispatch_async(dispatch_get_main_queue(), { self.showCamera() })
        }
     }
 
 
     /*
-    I tried calling after a delay, but it does not fix the problem.  Also tried modalPresentationStyle = 
+    Getting an error when I show the Camera on the device:
+    http://stackoverflow.com/questions/18890003/uiimagepickercontroller-error-snapshotting-a-view-that-has-not-been-rendered-re
+    http://stackoverflow.com/questions/25884801/ios-8-snapshotting-a-view-that-has-not-been-rendered-results-in-an-empty-snapsho?lq=1
+    So I broke out a showCamera function from getImageAction.
+
+    I tried calling after a delay, but it does not fix the problem.  Also tried modalPresentationStyle =
     CurrentContext.  Also tried modalPresentationStyle = FullScreen.  Nothing works.
     */
     func showCamera() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
-        //pickerController.modalPresentationStyle = .FullScreen // UIModalPresentationFullScreen
         pickerController.sourceType = UIImagePickerControllerSourceType.Camera
-        //    pickerController.allowsEditing = true
         self.presentViewController(pickerController, animated: true, completion: nil)
     }
 
@@ -286,21 +278,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: -
     // MARK: Resize UIImageView for best fit of UIImage in available space
 
-    /* Resize the image view when user goes switches between portrait and landscape.  This also will
-    re-position the top and bottom text fields.
-    Source ideas:
-    http://www.shinobicontrols.com/blog/posts/2014/08/06/ios8-day-by-day-day-14-rotation-deprecation
-    */
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        let availableHeight = getAvailableHeight(size.height)
-        if let image = self.imageView.image {
-            self.calcScaleforImageToResizeImageView(image, inMaxHeight: availableHeight, inMaxWidth: size.width)
-        } else {
-            dispatch_async(dispatch_get_main_queue(), { self.resizeImageView(availableHeight) })
-        }
-    }
-
-
 
     private func getActualWidth(inView: UIView) -> CGFloat {
         var realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
@@ -308,15 +285,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
 
-    // most of the time, we just need to start out with the view bounds, but on a rotate, we'll need the incoming size
     private func getAvailableHeight() -> CGFloat {
-        // it looks like the view bounds height and width don't swap anymore when you change orientation
-        // I don't know how best to get the available height when we are rotated, so just use the screen bounds which does swap
        return getAvailableHeight(UIScreen.mainScreen().bounds.size.height)
     }
 
     private func getAvailableHeight(rawHeight: CGFloat) -> CGFloat {
-        return rawHeight - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height - VERTICAL_MARGIN
+        return rawHeight - self.toolBar.bounds.size.height - self.topToolbar.bounds.size.height
     }
 
     private func resizeImageView(newheight: CGFloat) {

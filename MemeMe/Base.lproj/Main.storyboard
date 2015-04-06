@@ -136,6 +136,7 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1A-Lw-jcO">
                                 <rect key="frame" x="-2" y="0.0" width="604" height="44"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ABF-cs-IPn"/>
                                     <constraint firstAttribute="height" constant="44" id="O4h-BU-deO"/>
                                 </constraints>
                                 <items>
@@ -159,8 +160,11 @@
                                     </mask>
                                 </variation>
                             </toolbar>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4M6-Ys-8xE">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4M6-Ys-8xE">
                                 <rect key="frame" x="-2" y="556" width="604" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="sQS-Fl-FFD"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="7wQ-t3-9Fs"/>
                                     <barButtonItem tag="1" systemItem="camera" id="gW2-vm-1vc">
@@ -179,10 +183,10 @@
                                 </items>
                             </toolbar>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="QeF-Pc-yAu" userLabel="Image and Labels" customClass="UIImageView">
-                                <rect key="frame" x="0.0" y="173" width="600" height="383"/>
+                                <rect key="frame" x="0.0" y="56" width="600" height="500"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="BOTTOM" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P9Y-RL-LAv">
-                                        <rect key="frame" x="0.0" y="327" width="600" height="48"/>
+                                        <rect key="frame" x="0.0" y="444" width="600" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="AVD-Z7-1JV"/>
                                             <constraint firstAttribute="height" constant="32" id="VDA-Bp-seA"/>
@@ -226,7 +230,9 @@
                                         </variation>
                                     </textField>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" constant="500" id="0Kh-zZ-By5"/>
                                     <constraint firstAttribute="height" constant="383" id="1E7-eC-D7l"/>
                                     <constraint firstItem="P9Y-RL-LAv" firstAttribute="trailing" secondItem="QeF-Pc-yAu" secondAttribute="trailingMargin" id="8IR-h3-srl"/>
                                     <constraint firstAttribute="trailing" secondItem="ylx-m4-Hfs" secondAttribute="trailing" id="GGz-Ky-CoD"/>
@@ -245,6 +251,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="1E7-eC-D7l"/>
                                         <exclude reference="GGz-Ky-CoD"/>
                                         <exclude reference="IDu-of-lWF"/>
                                         <exclude reference="v9p-2N-M9y"/>
@@ -272,6 +279,7 @@
                             <constraint firstItem="4M6-Ys-8xE" firstAttribute="width" secondItem="QeF-Pc-yAu" secondAttribute="width" id="23N-4u-tdR"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4M6-Ys-8xE" secondAttribute="trailing" constant="-16" id="3l5-7h-7jA"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="j1A-Lw-jcO" secondAttribute="bottom" constant="16" id="5pO-31-Jk6"/>
+                            <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="j1A-Lw-jcO" secondAttribute="bottom" id="6Fx-un-AI9"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="leading" secondItem="2fe-Tj-OWE" secondAttribute="leadingMargin" constant="6" id="86P-jl-hJ0"/>
                             <constraint firstItem="j1A-Lw-jcO" firstAttribute="top" secondItem="2fe-Tj-OWE" secondAttribute="topMargin" id="L4f-eW-vPz"/>
                             <constraint firstItem="QeF-Pc-yAu" firstAttribute="top" secondItem="Ita-kF-VJR" secondAttribute="bottom" constant="41" id="LmC-j5-0eS"/>
@@ -322,6 +330,7 @@
                                 <exclude reference="wjS-xF-rfo"/>
                                 <exclude reference="wnT-WM-v9r"/>
                                 <exclude reference="5pO-31-Jk6"/>
+                                <exclude reference="6Fx-un-AI9"/>
                                 <exclude reference="86P-jl-hJ0"/>
                                 <exclude reference="LmC-j5-0eS"/>
                                 <exclude reference="Qds-Bl-28a"/>
@@ -382,7 +391,7 @@
                         <outlet property="bottomMemeText" destination="P9Y-RL-LAv" id="Sjp-tl-gaZ"/>
                         <outlet property="cameraButton" destination="gW2-vm-1vc" id="xTX-ug-czJ"/>
                         <outlet property="imageView" destination="QeF-Pc-yAu" id="2mF-gn-nMe"/>
-                        <outlet property="imageViewHeightConstraint" destination="1E7-eC-D7l" id="yQG-7Y-CNj"/>
+                        <outlet property="imageViewHeightConstraint" destination="0Kh-zZ-By5" id="6fE-ff-GGN"/>
                         <outlet property="saveButton" destination="HYc-ec-yZK" id="2Fk-Og-Nd9"/>
                         <outlet property="toolBar" destination="4M6-Ys-8xE" id="0Go-oh-Rlc"/>
                         <outlet property="topMemeText" destination="ylx-m4-Hfs" id="ca0-nA-ViS"/>
@@ -406,27 +415,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="up1-oX-cUc">
-                                <rect key="frame" x="0.0" y="56" width="600" height="544"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="544" id="Acz-LC-dUe"/>
+                                    <constraint firstAttribute="height" constant="600" id="cg8-JZ-U6p"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Acz-LC-dUe"/>
+                                    </mask>
+                                </variation>
                             </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="L8Q-b1-WYp" firstAttribute="top" secondItem="up1-oX-cUc" secondAttribute="bottom" id="1g1-n4-lzs"/>
                             <constraint firstItem="up1-oX-cUc" firstAttribute="top" secondItem="K0m-nG-1Qw" secondAttribute="topMargin" constant="56" id="2JY-DR-4Lu"/>
                             <constraint firstItem="up1-oX-cUc" firstAttribute="leading" secondItem="K0m-nG-1Qw" secondAttribute="leadingMargin" constant="-16" id="B2t-GK-ZjC"/>
+                            <constraint firstItem="up1-oX-cUc" firstAttribute="top" secondItem="K0m-nG-1Qw" secondAttribute="topMargin" id="YBM-SR-hlc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="up1-oX-cUc" secondAttribute="trailing" constant="-16" id="xLR-YB-BnJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="2JY-DR-4Lu"/>
+                                <exclude reference="YBM-SR-hlc"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="up1-oX-cUc" id="1zD-7H-yHS"/>
-                        <outlet property="imageViewHeightConstraint" destination="Acz-LC-dUe" id="Hyk-Vk-liB"/>
+                        <outlet property="imageViewHeightConstraint" destination="cg8-JZ-U6p" id="8Bm-Vk-lDq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SKu-QM-0It" userLabel="First Responder" sceneMemberID="firstResponder"/>
