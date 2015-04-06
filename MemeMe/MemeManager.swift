@@ -11,14 +11,10 @@ import Foundation
 
 class MemeManager {
 
-
     var memeList = [Meme]()
 
-
     func numberOfMemes() -> Int { return memeList.count }
-
     func memeAtIndex(row: Int) -> Meme { return memeList[row] }
-
     func appendMeme(meme: Meme) { memeList.append(meme) }
     func removeMemeAtIndex(row: Int) { memeList.removeAtIndex(row) }
 

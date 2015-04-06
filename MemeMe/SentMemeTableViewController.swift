@@ -55,17 +55,9 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") as UITableViewCell
         let meme = memeManager.memeAtIndex(indexPath.row)
 
-
-//        cell.separatorInset = UIEdgeInsetsZero
-//        cell.preservesSuperviewLayoutMargins = true
-//        cell.layoutMargins = UIEdgeInsets(top: 10.0, left: 0.0, bottom: 10.0, right: 0.0)
-
-
         cell.textLabel?.text = meme.topString
         if let i = meme.memedImage {
             cell.imageView?.image = i
-//            cell.imageView?.contentMode = .Center
-//            cell.imageView?.bounds.size.height = 30.0
         }
 
         if let detailTextLabel = cell.detailTextLabel {

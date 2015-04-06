@@ -53,7 +53,6 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //       assert(memeManager != nil, "Need to set memeManager in EditMemeViewController")
         cameraButton.enabled = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
         saveButton.enabled = false
         topMemeText.delegate = self

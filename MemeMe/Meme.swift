@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// It needs to be Equatable to support the find function for finding an instance in an array
+
 class Meme: Equatable {
 
     var topString: String
