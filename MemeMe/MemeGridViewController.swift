@@ -13,7 +13,7 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
 
     // MARK: -
     // MARK: Properties & Outlets
-    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
+    private let memeManager = (UIApplication.sharedApplication().delegate as! AppDelegate).memeManager
     private let reuseIdentifier = "SentMemeCollectionCell"
     private var isEditing = false
 
@@ -58,7 +58,7 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as MemeCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! MemeCollectionViewCell
 
         cell.deleteButton.hidden = !self.isEditing
         cell.deleteButton.tag = indexPath.row
@@ -80,7 +80,7 @@ class MemeGridViewController: UICollectionViewController, UICollectionViewDelega
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as MemeDetailViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
         self.navigationController?.pushViewController(controller, animated: true)
     }

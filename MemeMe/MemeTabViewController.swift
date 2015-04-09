@@ -10,7 +10,7 @@ import UIKit
 
 class MemeTabViewController: UITabBarController {
 
-    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
+    private let memeManager = (UIApplication.sharedApplication().delegate as! AppDelegate).memeManager
     private var isFirstAppearance = true
 
     override func viewDidAppear(animated: Bool) {
@@ -32,7 +32,7 @@ class MemeTabViewController: UITabBarController {
     func presentMemeEditorModal() {
 
         if let currentSelectedTabVC = self.selectedViewController {
-            let editController = currentSelectedTabVC.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
+            let editController = currentSelectedTabVC.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as! EditMemeViewController
             editController.currentMeme = nil
             currentSelectedTabVC.presentViewController(editController, animated: true, completion: nil)
         }

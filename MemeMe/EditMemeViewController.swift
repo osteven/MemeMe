@@ -17,7 +17,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     // MARK: Properties
     var currentMeme: Meme? = nil
     private let ALBUM_TAG = 2
-    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
+    private let memeManager = (UIApplication.sharedApplication().delegate as! AppDelegate).memeManager
 
 
     // MARK: -
@@ -41,9 +41,12 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     */
     class func presentForAddingOrEditingMeme(sourceController: UIViewController, editMeme: Meme? = nil) {
         sourceController.editing = false
-        let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as EditMemeViewController
-        editController.currentMeme = editMeme
-        sourceController.presentViewController(editController, animated: true, completion: nil)
+        if let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as? EditMemeViewController {
+            editController.currentMeme = editMeme
+            sourceController.presentViewController(editController, animated: true, completion: nil)
+        } else {
+            assert(false, "failed to instantiate MemeEditViewController")
+        }
     }
 
 
@@ -177,7 +180,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         var newText = textField.text as NSString
         newText = newText.stringByReplacingCharactersInRange(range, withString: string).uppercaseString
 
-        textField.text = newText
+        textField.text = newText as String
         saveButton.enabled = readyForSave()
         return false
     }

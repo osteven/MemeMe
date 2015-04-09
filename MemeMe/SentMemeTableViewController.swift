@@ -12,7 +12,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
 
     // MARK: -
     // MARK: Properties & Outlets
-    private let memeManager = (UIApplication.sharedApplication().delegate as AppDelegate).memeManager
+    private let memeManager = (UIApplication.sharedApplication().delegate as! AppDelegate).memeManager
     @IBOutlet weak var tableView: UITableView!
 
 
@@ -47,27 +47,27 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
     // MARK: -
     // MARK: UITableViewDataSource support
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return memeManager.numberOfMemes()
+        return self.memeManager.numberOfMemes()
     }
 
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") as? UITableViewCell
         let meme = memeManager.memeAtIndex(indexPath.row)
 
-        cell.textLabel?.text = meme.topString
+        cell!.textLabel?.text = meme.topString
         if let i = meme.memedImage {
-            cell.imageView?.image = i
+            cell!.imageView?.image = i
         }
 
-        if let detailTextLabel = cell.detailTextLabel {
+        if let detailTextLabel = cell!.detailTextLabel {
             detailTextLabel.text = meme.bottomString
         }
-        return cell
+        return cell!
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as MemeDetailViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
         controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
         self.navigationController?.pushViewController(controller, animated: true)
     }
