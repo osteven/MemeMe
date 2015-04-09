@@ -193,15 +193,23 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
         return imageView.image != nil
     }
 
+
+    /*
+        Udacity reviewer: Some of the custom keyboards (like swype) can incorrectly report keyboardWillShow method multiple times. In this case your view will slide up higher than it should be. Please have a look at this conversation on stack overflow: http://stackoverflow.com/questions/25874975/cant-get-correct-value-of-keyboard-height-in-ios8 To solve this issue you can change your code to this: self.view.frame.origin.y = -getKeyboardHeight(notification)
+    */
     func keyboardWillShow(notification: NSNotification) {
         if bottomMemeText.isFirstResponder() {
-            self.view.frame.origin.y -= getKeyboardHeight(notification)
+            self.view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
 
+
+    /*
+        Udacity reviewer: In this case we would like to set the view to it's default position (which is 0). Modifying your code to self.view.frame.origin.y  = 0 will make your code independent from getKeyboardHeight method.
+    */
     func keyboardWillHide(notification: NSNotification) {
         if bottomMemeText.isFirstResponder() {
-            self.view.frame.origin.y += getKeyboardHeight(notification)
+            self.view.frame.origin.y = 0
         }
     }
 
