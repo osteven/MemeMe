@@ -20,7 +20,7 @@ class MemeManager {
 
     func removeMeme(meme: Meme?) {
         if nil == meme { return }
-        if let index = find(self.memeList, meme!) {
+        if let index = self.memeList.indexOf(meme!) {
             self.memeList.removeAtIndex(index)
         }
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MemeGridViewController: UICollectionViewController, UICollectionViewDelegate {
+class MemeGridViewController: UICollectionViewController {
 
     // MARK: -
     // MARK: Properties & Outlets

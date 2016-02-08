@@ -52,7 +52,7 @@ class SentMemeTableViewController: UIViewController, UITableViewDelegate {
 
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") as? UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("SentMemeTableCell") 
         let meme = memeManager.memeAtIndex(indexPath.row)
 
         cell!.textLabel?.text = meme.topString

@@ -72,7 +72,7 @@ class MemeDetailViewController: UIViewController     {
     // MARK: Resize UIImageView for best fit of UIImage in available space
 
     private func getActualWidth(inView: UIView) -> CGFloat {
-        var realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        let realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
         return realWidth
     }
 

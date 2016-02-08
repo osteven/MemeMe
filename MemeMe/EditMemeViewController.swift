@@ -41,7 +41,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     */
     class func presentForAddingOrEditingMeme(sourceController: UIViewController, editMeme: Meme? = nil) {
         sourceController.editing = false
-        if let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController")! as? EditMemeViewController {
+        if let editController = sourceController.storyboard!.instantiateViewControllerWithIdentifier("MemeEditViewController") as? EditMemeViewController {
             editController.currentMeme = editMeme
             sourceController.presentViewController(editController, animated: true, completion: nil)
         } else {
@@ -128,15 +128,16 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
      }
 
     private func saveSentMeme(memeImage: UIImage) {
+        guard let topText = topMemeText.text, bottomText = bottomMemeText.text else { fatalError("textfields should not be nil") }
         if let meme = currentMeme {
             // editing a sent meme
-            meme.topString = topMemeText.text
-            meme.bottomString = bottomMemeText.text
+            meme.topString = topText
+            meme.bottomString = bottomText
             meme.originalImage = imageView.image
             meme.memedImage = memeImage
         } else {
             // new meme
-            currentMeme = Meme(top: topMemeText.text, bottom: bottomMemeText.text)
+            currentMeme = Meme(top: topText, bottom: bottomText)
             currentMeme!.originalImage = imageView.image
             currentMeme!.memedImage = memeImage
             memeManager.appendMeme(currentMeme!)
@@ -176,8 +177,9 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let rawText = textField.text  else { /* I don't think this is possible */ return true }
         // Construct the text that will be in the field if this change is accepted
-        var newText = textField.text as NSString
+        var newText = rawText as NSString
         newText = newText.stringByReplacingCharactersInRange(range, withString: string).uppercaseString
 
         textField.text = newText as String
@@ -186,9 +188,10 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
     }
 
     private func readyForSave() -> Bool {
-        var s = topMemeText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        guard let topText = topMemeText.text, bottomText = bottomMemeText.text else { return false }
+        var s = topText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         if s == "TOP" || s == "" { return false }
-        s = bottomMemeText.text.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        s = bottomText.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         if s == "BOTTOM" || s == "" { return false }
         return imageView.image != nil
     }
@@ -269,7 +272,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
     // http://stackoverflow.com/questions/16878607/change-uiimageview-size-to-match-image-with-autolayout
     // http://stackoverflow.com/questions/8701751/uiimageview-change-size-to-image-size
-    internal func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    internal func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         self.dismissViewControllerAnimated(true, completion: nil)
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
@@ -290,7 +293,7 @@ class EditMemeViewController: UIViewController, UIImagePickerControllerDelegate,
 
 
     private func getActualWidth(inView: UIView) -> CGFloat {
-        var realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
+        let realWidth: CGFloat = (UIScreen.mainScreen().bounds.height > UIScreen.mainScreen().bounds.width) ? UIScreen.mainScreen().bounds.size.width : UIScreen.mainScreen().bounds.size.height
         return realWidth
     }
 
