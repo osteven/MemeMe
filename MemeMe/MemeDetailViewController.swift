@@ -18,6 +18,15 @@ class MemeDetailViewController: UIViewController     {
 
     // MARK: -
     // MARK: Load 
+
+    class func instantiateFromStoryboard(storyboard: UIStoryboard?, withMeme meme: Meme) -> MemeDetailViewController {
+        guard let controller = storyboard?.instantiateViewControllerWithIdentifier(String(MemeDetailViewController)) as? MemeDetailViewController
+            else { fatalError("failed to find MemeDetailViewController in the storyboard") }
+        controller.currentMeme = meme
+        return controller
+    }
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

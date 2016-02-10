@@ -80,8 +80,7 @@ class MemeGridViewController: UICollectionViewController {
     }
 
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MemeDetailViewController") as! MemeDetailViewController
-        controller.currentMeme = memeManager.memeAtIndex(indexPath.row)
+        let controller = MemeDetailViewController.instantiateFromStoryboard(self.storyboard, withMeme: memeManager.memeAtIndex(indexPath.row))
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
